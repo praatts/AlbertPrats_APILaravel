@@ -115,8 +115,20 @@ Route::post('/animal/{owner_id}', function (Request $request, $owner_id) {
 
 });
 
-Route::delete('/animal/{id}', function() {
+Route::delete('/animal/{id}', function($id) {
+    $animal = Animals::find($id);
 
+    if (!$animal) {
+        return response()->json([
+            'mensaje' => 'No se ha encontrado ningún animal con el identificador ' . $id
+        ], 404);
+    }
+
+    $animal->animal();
+
+    return response()->json([
+        'mensaje' => 'Se ha eliminado correctamente el animal con identificador ' . $id
+    ]);
 });
 
 
