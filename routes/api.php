@@ -115,4 +115,8 @@ Route::post('/animal/{owner_id}', function (Request $request, $owner_id) {
 
 });
 
+Route::delete('/animal/{id}', function() {
+
+});
+
 
