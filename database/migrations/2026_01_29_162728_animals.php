@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('enfermedad');
             $table->text('comentarios');
             $table->foreignId('owner_id')->constrained('owners', 'id_persona')->cascadeOnDelete();
+            $table->string('test');
         });
     }
 
