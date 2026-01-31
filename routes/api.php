@@ -88,7 +88,15 @@ Route::get('/owners', function () {
 //Ruta para ver los datos de un animal, pasando su identificador por URL
 
 Route::get('/animal/{id}', function ($id) {
-    return new AnimalResource(Animals::findOrFail($id));
+    $animal = Animals::find($id);
+
+    if (!$animal) {
+        return response()->json([
+            'mensaje' => 'No se ha encontrado ningún animal con el identificador ' . $id
+        ], 404);
+    } else {
+        return new AnimalResource($animal);
+    }
 });
 
 //Ruta para crear un animal, se verificará que el owner_id existe en la tabla owners y que el tipo de animal es válido
@@ -163,14 +171,28 @@ Route::put('/animal/{id}', function (Request $request, $id) {
         ], 404);
     }
 
+
     if (in_array($tipo, $validTypes)) {
         $animal->update([
             'nombre' => $request->input('nombre'),
-            'tipo' => $request->input('apellido'),
+            'tipo' => $request->input('tipo'),
+            'peso' => $request->input('peso'),
+            'enfermedad' => $request->input('enfermedad'),
+            'comentarios' => $request->input('comentarios'),
         ]);
-    } else {
+
         return response()->json([
             'mensaje' => 'Animal con el identificador ' . $id . ' actualizado correctamente',
-        ]);
+            'datos_actualizados' => new AnimalResource($animal) 
+        ], 200);
+    } else {
+        return response()->json([
+            'mensaje' => 'El tipo de animal seleccionado no está disponible'
+        ], 400);
     }
+});
+
+//Ruta para ver todos los animales registrados en la base de datos
+Route::get('/animals', function () {
+    return AnimalResource::collection(Animals::all());
 });
