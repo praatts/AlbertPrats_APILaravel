@@ -60,6 +60,7 @@ Route::put('/owner/{id}', function (Request $request, $id) {
 
     return response()->json([
         'mensaje' => 'Owner con el identificador ' . $id . ' actualizado correctamente',
+        'datos_actualizados' => new OwnersResource($owner),
     ]);
 });
 
