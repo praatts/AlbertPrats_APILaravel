@@ -15,10 +15,18 @@ Route::get('/user', function (Request $request) {
 
 //Devuelve los datos de un único dueño, se pasa su identificador por parámetro de la URL
 Route::get('/owner/{id}', function ($id) {
-    return new OwnersResource(Owners::findOrFail($id));
+    $owner = Owners::find($id);
+
+    if (!$owner) {
+        return response()->json([
+            'mensaje' => 'No se ha encontrado ningún dueño con el identificador ' . $id
+        ], 404);
+    } else {
+        return new OwnersResource($owner);
+    }
 });
 
-//Ruta para insertar un "dueño" en la tabla 'owners' en la base de datos
+//Ruta para insertar un dueño en la base de datos
 
 Route::post('/owner', function (Request $request) {
     $owner = Owners::create([
@@ -29,6 +37,7 @@ Route::post('/owner', function (Request $request) {
     if ($owner) {
         return response()->json([
             'mensaje' => 'Dueño añadido correctamente',
+            'datos' => new OwnersResource($owner)
         ], 201);
     }
 });
@@ -54,7 +63,7 @@ Route::put('/owner/{id}', function (Request $request, $id) {
     ]);
 });
 
-//Ruta que elimina un dueño según el identificador pasado por URL
+//Ruta que elimina un dueño según el identificador pasado por URL, se eliminarán todos los animales que tengan el identificador en el campo 'owner_id'
 Route::delete('/owner/{id}', function ($id) {
     $owner = Owners::find($id);
 
@@ -71,15 +80,21 @@ Route::delete('/owner/{id}', function ($id) {
     ]);
 });
 
+//Ruta para ver todos los dueños registrados en la base de datos
+Route::get('/owners', function () {
+    return OwnersResource::collection(Owners::all());
+});
+
 //Ruta para ver los datos de un animal, pasando su identificador por URL
 
 Route::get('/animal/{id}', function ($id) {
     return new AnimalResource(Animals::findOrFail($id));
 });
 
-//Ruta para crear un animal, la id del dueño se pasa por parámetro, se verifica primero que el dueño exista en la base de datos
+//Ruta para crear un animal, se verificará que el owner_id existe en la tabla owners y que el tipo de animal es válido
 
-Route::post('/animal/{owner_id}', function (Request $request, $owner_id) {
+Route::post('/animal/', function (Request $request) {
+    $owner_id = $request->input('owner_id');
     $owner = Owners::find($owner_id);
     $validTypes = ['perro', 'gato', 'conejo', 'hámster'];
     $tipo = $request->input('tipo');
@@ -90,9 +105,9 @@ Route::post('/animal/{owner_id}', function (Request $request, $owner_id) {
         ], 403);
     } else {
 
-        //Comprueba que el tipo de animal esté disponible
+        //Comprueba que el tipo de animal esté disponible y crea el animal
         if (in_array($tipo, $validTypes)) {
-            $animal = Animals::create(attributes: [
+            $animal = Animals::create([
                 'nombre' => $request->input('nombre'),
                 'tipo' => $tipo,
                 'peso' => $request->input('peso'),
@@ -101,21 +116,25 @@ Route::post('/animal/{owner_id}', function (Request $request, $owner_id) {
                 'owner_id' => $owner_id,
             ]);
         } else {
+
+            //Devuelve un mensaje de error si el tipo de animal no es válido
             return response()->json([
                 'mensaje' => 'El tipo de animal seleccionado no está disponible'
             ], 400);
         }
 
+        //Si se ha creado el animal, devuelve un mensaje de éxito junto con los datos del animal creado
         if ($animal) {
             return response()->json([
-                'mensaje' => 'Animal añadido correctamente',
+                'mensaje' => 'Animal añadido correctamente, el identificador del dueño es ' . $owner_id,
+                'datos' => new AnimalResource($animal)
             ], 201);
         }
     }
-
 });
 
-Route::delete('/animal/{id}', function($id) {
+//Ruta que elimina un animal según su identificador
+Route::delete('/animal/{id}', function ($id) {
     $animal = Animals::find($id);
 
     if (!$animal) {
@@ -124,11 +143,34 @@ Route::delete('/animal/{id}', function($id) {
         ], 404);
     }
 
-    $animal->animal();
+    $animal->delete();
 
     return response()->json([
         'mensaje' => 'Se ha eliminado correctamente el animal con identificador ' . $id
     ]);
 });
 
+//Ruta para actualiza los datos de un animal (menos dueño y su propio identificador)
 
+Route::put('/animal/{id}', function (Request $request, $id) {
+    $animal = Animals::find($id);
+    $tipo = $request->input('tipo');
+    $validTypes = ['perro', 'gato', 'conejo', 'hámster'];
+
+    if (!$animal) {
+        return response()->json([
+            'mensaje' => 'No se ha encontrado ningún animal con el identificador ' . $id
+        ], 404);
+    }
+
+    if (in_array($tipo, $validTypes)) {
+        $animal->update([
+            'nombre' => $request->input('nombre'),
+            'tipo' => $request->input('apellido'),
+        ]);
+    } else {
+        return response()->json([
+            'mensaje' => 'Animal con el identificador ' . $id . ' actualizado correctamente',
+        ]);
+    }
+});
