@@ -25,9 +25,21 @@
           }
         }
       ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
       "request": {
         "method": "GET",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
           "raw": "http://127.0.0.1:8000/api/owner/1",
           "protocol": "http",
@@ -45,6 +57,139 @@
           ]
         },
         "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Ver todos los dueños",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/owners",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "owners"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Ver todos los animales",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/animals",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "animals"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Ver animal individual",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/animal/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "animal",
+            "3"
+          ]
+        }
       },
       "response": []
     },
@@ -71,7 +216,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Ohh\",\n  \"apellido\": \"Miquelin\"\n}",
+          "raw": "{\n  \"nombre\": \"Ivan\",\n  \"apellido\": \"Prats\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -99,6 +244,39 @@
       "response": []
     },
     {
+      "name": "Insertar animal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Test\",\n  \"tipo\": \"gato\",\n  \"peso\": 47,\n  \"enfermedad\": \"ninguna\",\n  \"comentarios\": \"Si\",\n  \"owner_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/animal/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "animal",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Editar dueño",
       "event": [
         {
@@ -121,7 +299,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}",
+          "raw": "{\n  \"nombre\": \"Test1\",\n  \"apellido\": \"Actualizado\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -129,7 +307,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/owner/",
+          "raw": "http://127.0.0.1:8000/api/owner/3",
           "protocol": "http",
           "host": [
             "127",
@@ -141,7 +319,57 @@
           "path": [
             "api",
             "owner",
-            ""
+            "3"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Editar animal",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Updated 2.0\",\n  \"tipo\": \"gato\",\n  \"peso\": 50,\n  \"enfermedad\": \"si\",\n  \"comentarios\": \"Actualizado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/animal/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "animal",
+            "3"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -179,7 +407,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/owner/4",
+          "raw": "http://127.0.0.1:8000/api/owner/3",
           "protocol": "http",
           "host": [
             "127",
@@ -191,7 +419,7 @@
           "path": [
             "api",
             "owner",
-            "4"
+            "3"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -199,49 +427,34 @@
       "response": []
     },
     {
-      "name": "Añadir animal",
+      "name": "Eliminar animal",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
-        "method": "POST",
+        "method": "DELETE",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Firulais\",\n  \"tipo\": \"perro\",\n  \"peso\": 47,\n  \"enfermedad\": \"ninguna\",\n  \"comentarios\": \"Si\"\n}",
+          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}",
           "options": {
             "raw": {
               "language": "json"
             }
           }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/api/animal/4",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "api",
-            "animal",
-            "4"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Ver animal individual",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}"
         },
         "url": {
           "raw": "http://127.0.0.1:8000/api/animal/3",
@@ -258,7 +471,8 @@
             "animal",
             "3"
           ]
-        }
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
       },
       "response": []
     }
