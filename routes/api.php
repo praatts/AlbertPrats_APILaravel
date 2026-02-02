@@ -184,7 +184,7 @@ Route::put('/animal/{id}', function (Request $request, $id) {
 
         return response()->json([
             'mensaje' => 'Animal con el identificador ' . $id . ' actualizado correctamente',
-            'datos_actualizados' => new AnimalResource($animal) 
+            'datos_actualizados' => new AnimalResource($animal)
         ], 200);
     } else {
         return response()->json([
@@ -195,5 +195,14 @@ Route::put('/animal/{id}', function (Request $request, $id) {
 
 //Ruta para ver todos los animales registrados en la base de datos
 Route::get('/animals', function () {
-    return AnimalResource::collection(Animals::all());
+    $animals = Animals::all();
+
+    if ($animals->isEmpty()) {
+        return response()->json([
+            'mensaje' => 'No hay ningún animal registrado'
+        ], 404);
+    } else {
+        return AnimalResource::collection(Animals::all());
+    }
+
 });
