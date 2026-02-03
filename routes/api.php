@@ -29,16 +29,25 @@ Route::get('/owner/{id}', function ($id) {
 //Ruta para insertar un dueño en la base de datos
 
 Route::post('/owner', function (Request $request) {
-    $owner = Owners::create([
-        'name' => $request->input('nombre'),
-        'surname' => $request->input('apellido'),
-    ]);
+    $name = $request->input('nombre');
+    $surname = $request->input('apellido');
 
-    if ($owner) {
+    if (!$name || !$surname) {
         return response()->json([
-            'mensaje' => 'Dueño añadido correctamente',
-            'datos' => new OwnersResource($owner)
-        ], 201);
+            'mensaje' => 'Nombre o apellido vacío, rellene los 2 campos'
+        ], 400);
+    } else {
+        $owner = Owners::create([
+            'name' => $request->input('nombre'),
+            'surname' => $request->input('apellido'),
+        ]);
+
+        if ($owner) {
+            return response()->json([
+                'mensaje' => 'Dueño añadido correctamente',
+                'datos' => new OwnersResource($owner)
+            ], 201);
+        }
     }
 });
 
@@ -116,6 +125,7 @@ Route::post('/animal/', function (Request $request) {
 
         //Comprueba que el tipo de animal esté disponible y crea el animal
         if (in_array($tipo, $validTypes)) {
+
             $animal = Animals::create([
                 'nombre' => $request->input('nombre'),
                 'tipo' => $tipo,
@@ -204,5 +214,4 @@ Route::get('/animals', function () {
     } else {
         return AnimalResource::collection(Animals::all());
     }
-
 });
