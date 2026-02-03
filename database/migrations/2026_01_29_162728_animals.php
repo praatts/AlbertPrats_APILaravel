@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('animals', function (Blueprint $table) {
             $table->id('id_animal');
             $table->string('nombre')->nullable(false);
-            $table->enum('tipo', ['perro', 'gato', 'conejo', 'hámster'])->nullable(false);
+            $table->enum('tipo', ['perro', 'gato', 'conejo', 'hamster'])->nullable(false);
             $table->double('peso');
             $table->string('enfermedad');
             $table->text('comentarios');

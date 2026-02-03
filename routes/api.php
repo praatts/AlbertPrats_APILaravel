@@ -114,7 +114,7 @@ Route::get('/animal/{id}', function ($id) {
 Route::post('/animal/', function (Request $request) {
     $owner_id = $request->input('owner_id');
     $owner = Owners::find($owner_id);
-    $validTypes = ['perro', 'gato', 'conejo', 'hámster'];
+    $validTypes = ['perro', 'gato', 'conejo', 'hamster'];
     $tipo = $request->input('tipo');
 
     if (!$owner) {
@@ -122,6 +122,12 @@ Route::post('/animal/', function (Request $request) {
             'mensaje' => 'No se ha podido registrar el animal, no se ha encontrado ningún dueño con el identificador ' . $owner_id
         ], 403);
     } else {
+
+    if (!$tipo) {
+        return response()->json([
+            'mensaje' => 'El campo tipo no puede estar vacío'
+        ], 400);
+    }
 
         //Comprueba que el tipo de animal esté disponible y crea el animal
         if (in_array($tipo, $validTypes)) {
@@ -174,7 +180,7 @@ Route::delete('/animal/{id}', function ($id) {
 Route::put('/animal/{id}', function (Request $request, $id) {
     $animal = Animals::find($id);
     $tipo = $request->input('tipo');
-    $validTypes = ['perro', 'gato', 'conejo', 'hámster'];
+    $validTypes = ['perro', 'gato', 'conejo', 'hamster'];
 
     if (!$animal) {
         return response()->json([
@@ -182,6 +188,11 @@ Route::put('/animal/{id}', function (Request $request, $id) {
         ], 404);
     }
 
+    if (!$tipo) {
+        return response()->json([
+            'mensaje' => 'El campo tipo no puede estar vacío'
+        ], 400);
+    }
 
     if (in_array($tipo, $validTypes)) {
         $animal->update([

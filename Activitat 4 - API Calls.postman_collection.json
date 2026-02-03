@@ -1,11 +1,11 @@
 {
   "info": {
-    "_postman_id": "8bcc59a2-1742-48c3-8c9c-407abb6bd225",
+    "_postman_id": "baf441a3-1aad-4ffa-86e5-cdaa5e856bd0",
     "name": "Activitat 4 - API Calls",
     "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "51942333",
-    "_collection_link": "https://go.postman.co/collection/51942333-8bcc59a2-1742-48c3-8c9c-407abb6bd225?source=collection_link"
+    "_exporter_id": "51970352",
+    "_collection_link": "https://go.postman.co/collection/51970352-baf441a3-1aad-4ffa-86e5-cdaa5e856bd0?source=collection_link"
   },
   "item": [
     {
@@ -175,7 +175,7 @@
           "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}"
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/animal/3",
+          "raw": "http://127.0.0.1:8000/api/animal/1",
           "protocol": "http",
           "host": [
             "127",
@@ -187,7 +187,7 @@
           "path": [
             "api",
             "animal",
-            "3"
+            "1"
           ]
         }
       },
@@ -216,7 +216,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Ivan\",\n  \"apellido\": \"Prats\"\n}",
+          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Prats\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -250,7 +250,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Test\",\n  \"tipo\": \"gato\",\n  \"peso\": 47,\n  \"enfermedad\": \"ninguna\",\n  \"comentarios\": \"Si\",\n  \"owner_id\": 1\n}",
+          "raw": "{\n  \"nombre\": \"Test\",\n  \"tipo\": \"gato\",\n  \"peso\": 47,\n  \"enfermedad\": \"ninguna\",\n  \"comentarios\": \"Si\",\n  \"owner_id\": 2\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -299,7 +299,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Test1\",\n  \"apellido\": \"Actualizado\"\n}",
+          "raw": "{\n  \"nombre\": \"Albert\",\n  \"apellido\": \"Actualizado\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -307,7 +307,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/owner/3",
+          "raw": "http://127.0.0.1:8000/api/owner/1",
           "protocol": "http",
           "host": [
             "127",
@@ -319,7 +319,7 @@
           "path": [
             "api",
             "owner",
-            "3"
+            "1"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -349,7 +349,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nombre\": \"Updated 2.0\",\n  \"tipo\": \"gato\",\n  \"peso\": 50,\n  \"enfermedad\": \"si\",\n  \"comentarios\": \"Actualizado\"\n}",
+          "raw": "{\n  \"nombre\": \"Firulais\",\n  \"tipo\": \"gato\",\n  \"peso\": 50,\n  \"enfermedad\": \"si\",\n  \"comentarios\": \"Actualizado\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -357,7 +357,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/animal/3",
+          "raw": "http://127.0.0.1:8000/api/animal/1",
           "protocol": "http",
           "host": [
             "127",
@@ -369,7 +369,7 @@
           "path": [
             "api",
             "animal",
-            "3"
+            "1"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -407,7 +407,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/owner/3",
+          "raw": "http://127.0.0.1:8000/api/owner/1",
           "protocol": "http",
           "host": [
             "127",
@@ -419,7 +419,7 @@
           "path": [
             "api",
             "owner",
-            "3"
+            "1"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -457,7 +457,7 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/api/animal/3",
+          "raw": "http://127.0.0.1:8000/api/animal/2",
           "protocol": "http",
           "host": [
             "127",
@@ -469,7 +469,7 @@
           "path": [
             "api",
             "animal",
-            "3"
+            "2"
           ]
         },
         "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
